@@ -6,8 +6,8 @@ function main(){
 
 	const joystickRadius = 40;
 	const joysticks = [
-		{ color: "#82b4ff" }, // Left joystick
-		{ color: "#ff8a82" }  // Right joystick
+		{ color: "#82b4ff88" }, // Left joystick
+		{ color: "#ff8a8288" }  // Right joystick
 	]
 
 	const emulatedGamepad = {
@@ -60,7 +60,7 @@ function main(){
 		for(let i = 0; i < joysticks.length; i++){
 			if(joysticks[i].active){
 				// Draw joystick base
-				canvasCtx.fillStyle = "#cccccc";
+				canvasCtx.fillStyle = "#cccccc55";
 				canvasCtx.beginPath();
 				canvasCtx.arc(joysticks[i].startX, joysticks[i].startY, joystickRadius, 0, 2 * Math.PI);
 				canvasCtx.fill();
