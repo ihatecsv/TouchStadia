@@ -5,7 +5,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://stadia.google.com/*"],
-			"js": ["gamepad-emu.js"],
+			"js": ["touchstadia.js"],
 			"run_at": "document_start"
 		}
 	],
