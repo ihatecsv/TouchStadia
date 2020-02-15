@@ -1,14 +1,39 @@
 {
 	"name": "TouchStadia",
 	"version": "0.0.1",
-	"description": "Use touchscreen controls to play Stadia without a controller!",
+	"description": "TouchStadia is a Chrome Extension which adds on-screen joystick control to Stadia for touchscreen devices!",
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"page_action": {
+		"default_popup": "settings.html",
+		"default_icon": {
+			"16": "img/ts-16.png",
+			"32": "img/ts-32.png",
+			"48": "img/ts-48.png",
+			"128": "img/ts-128.png"
+		  }
+	},
 	"content_scripts": [
 		{
-			"matches": ["https://stadia.google.com/*", "https://html5gamepad.com/*"],
+			"matches": [
+				"https://stadia.google.com/*",
+				"https://html5gamepad.com/*"
+			],
 			"js": ["touchstadia.js"],
 			"run_at": "document_start"
 		}
 	],
-	"permissions": ["https://stadia.google.com/*", "https://html5gamepad.com/*"],
+	"permissions": [
+		"storage",
+		"declarativeContent"
+	],
+	"icons": {
+		"16": "img/ts-16.png",
+		"32": "img/ts-32.png",
+		"48": "img/ts-48.png",
+		"128": "img/ts-128.png"
+	},
 	"manifest_version": 2
 }

@@ -10,9 +10,6 @@ function main(){
 	
 	const startTime = Date.now();
 
-	const stickRadius = 40;
-	const buttonDiameter = 60;
-	const buttonBorderOffset = 20;
 	const sticks = [
 		{ color: "#82b4ff88" }, // Left joystick
 		{ color: "#ff8a8288" }  // Right joystick
@@ -137,10 +134,10 @@ function main(){
 		buttonElem.style.cssText = "position:fixed;z-index:1001;vertical-align:middle;display:table-cell;text-align:center;color:#ffffff;";
 		buttonElem.style.cssText += "width:" + buttonDiameter + "px;height:" + buttonDiameter + "px;border-radius:" + buttonDiameter + "px;font-size:" + buttonDiameter + "px;";
 		buttonElem.style.cssText += "background-color:" + emulatedGamepad.buttons[i].color + ";";
-		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.cssText += "left:" + (emulatedGamepad.buttons[i].locLeft + buttonBorderOffset) + "px;";
-		if(typeof emulatedGamepad.buttons[i].locRight !== "undefined") buttonElem.style.cssText += "right:" + (emulatedGamepad.buttons[i].locRight + buttonBorderOffset) + "px;";
-		if(typeof emulatedGamepad.buttons[i].locTop !== "undefined") buttonElem.style.cssText += "top:" + (emulatedGamepad.buttons[i].locTop + buttonBorderOffset) + "px;";
-		if(typeof emulatedGamepad.buttons[i].locBottom !== "undefined") buttonElem.style.cssText += "bottom:" + (emulatedGamepad.buttons[i].locBottom + buttonBorderOffset) + "px;";
+		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.cssText += "left:" + (emulatedGamepad.buttons[i].locLeft + buttonBorderLeftOffset) + "px;";
+		if(typeof emulatedGamepad.buttons[i].locRight !== "undefined") buttonElem.style.cssText += "right:" + (emulatedGamepad.buttons[i].locRight + buttonBorderRightOffset) + "px;";
+		if(typeof emulatedGamepad.buttons[i].locTop !== "undefined") buttonElem.style.cssText += "top:" + (emulatedGamepad.buttons[i].locTop + buttonBorderTopOffset) + "px;";
+		if(typeof emulatedGamepad.buttons[i].locBottom !== "undefined") buttonElem.style.cssText += "bottom:" + (emulatedGamepad.buttons[i].locBottom + buttonBorderBottomOffset) + "px;";
 		emulatedGamepad.buttons[i].buttonElem = buttonElem;
 
 		emulatedGamepad.buttons[i].pressed = false;
@@ -268,7 +265,16 @@ function main(){
 		return [emulatedGamepad, null, null, null];
 	}
 }
-  
-const injScript = document.createElement("script");
-injScript.appendChild(document.createTextNode("(" + main + ")();"));
-(document.body || document.head || document.documentElement).appendChild(injScript);
+
+chrome.storage.sync.get([
+	"stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset",
+], function(settings) {
+	let injVarTxt = "";
+	const settingsKeys = Object.keys(settings);
+	for (const key of settingsKeys) {
+		injVarTxt += "const " + key + " = " + settings[key] + ";";
+	}
+	const injScript = document.createElement("script");
+	injScript.appendChild(document.createTextNode("(" + (main + "").slice(0, 16) + injVarTxt + (main + "").slice(16) + ")();"));
+	(document.body || document.head || document.documentElement).appendChild(injScript);
+});
