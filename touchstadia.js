@@ -114,14 +114,14 @@ function main(){
 		if(e.touches[0]) handleStickTouch(e.touches[0], touches.MOVE);
 		if(e.touches[1]) handleStickTouch(e.touches[1], touches.MOVE);
 		drawSticks();
-		setPositions();
+		setStickPositions();
 	}, false);
 	
 	canvasElem.addEventListener("touchend", function(e){
 		if(e.changedTouches[0]) handleStickTouch(e.changedTouches[0], touches.END);
 		if(e.changedTouches[1]) handleStickTouch(e.changedTouches[1], touches.END);
 		drawSticks();
-		setPositions();
+		setStickPositions();
 	}, false);
 
 	window.onload = function(){
