@@ -134,7 +134,7 @@ function main(){
 	for(let i = 0; i < emulatedGamepad.buttons.length; i++){
 		const buttonElem = document.createElement("div");
 		buttonElem.innerText = emulatedGamepad.buttons[i].label;
-		buttonElem.style.cssText = "position:fixed;z-index:1000;vertical-align:middle;display:table-cell;text-align:center;color:#ffffff;";
+		buttonElem.style.cssText = "position:fixed;z-index:1001;vertical-align:middle;display:table-cell;text-align:center;color:#ffffff;";
 		buttonElem.style.cssText += "width:" + buttonDiameter + "px;height:" + buttonDiameter + "px;border-radius:" + buttonDiameter + "px;font-size:" + buttonDiameter + "px;";
 		buttonElem.style.cssText += "background-color:" + emulatedGamepad.buttons[i].color + ";";
 		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.cssText += "left:" + (emulatedGamepad.buttons[i].locLeft + buttonBorderOffset) + "px;";
