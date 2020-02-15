@@ -1,11 +1,17 @@
 function main(){
+	const touches = {
+		START: "start",
+		MOVE: "move",
+		END: "end"
+	}
+
 	const canvasElem = document.createElement("canvas");
 	const canvasCtx = canvasElem.getContext("2d");
 	
 	const startTime = Date.now();
 
-	const joystickRadius = 40;
-	const joysticks = [
+	const stickRadius = 40;
+	const sticks = [
 		{ color: "#82b4ff88" }, // Left joystick
 		{ color: "#ff8a8288" }  // Right joystick
 	]
@@ -32,53 +38,57 @@ function main(){
 	canvasElem.width = window.innerWidth;
 	canvasElem.height = window.innerHeight;
 
-	const handleTouch = function(touch, state){
+	const handleStickTouch = function(touch, type){
 		const stickIndex = touch.clientX > window.innerWidth/2 ? 1 : 0;
-		const stick = joysticks[stickIndex];
-		if(state == 0){
-			stick.active = true;
-			stick.startX = stick.endX = touch.clientX;
-			stick.startY = stick.endY = touch.clientY;
-		}else if(state == 1){
-			stick.endX = touch.clientX;
-			stick.endY = touch.clientY;
-		}else if (state == 2){
-			stick.active = false;
-			stick.startX = stick.endX = 0;
-			stick.startY = stick.endY = 0;
+		const stick = sticks[stickIndex];
+		switch(type){
+			case touches.START:
+				stick.active = true;
+				stick.startX = stick.endX = touch.clientX;
+				stick.startY = stick.endY = touch.clientY;
+				break;
+			case touches.MOVE:
+				stick.endX = touch.clientX;
+				stick.endY = touch.clientY;
+				break;
+			case touches.END:
+				stick.active = false;
+				stick.startX = stick.endX = 0;
+				stick.startY = stick.endY = 0;
+				break;
 		}
 		stick.angle = Math.atan2(stick.startY - stick.endY, stick.startX - stick.endX) + Math.PI;
-		stick.distance = Math.sqrt(Math.pow(stick.startX - stick.endX, 2) + Math.pow(stick.startY - stick.endY, 2)) / joystickRadius;
+		stick.distance = Math.sqrt(Math.pow(stick.startX - stick.endX, 2) + Math.pow(stick.startY - stick.endY, 2)) / stickRadius;
 		if(stick.distance > 1) stick.distance = 1;
-		stick.deltaX = stick.distance * Math.cos(stick.angle) * joystickRadius;
-		stick.deltaY = stick.distance * Math.sin(stick.angle) * joystickRadius;
+		stick.deltaX = stick.distance * Math.cos(stick.angle) * stickRadius;
+		stick.deltaY = stick.distance * Math.sin(stick.angle) * stickRadius;
 		//console.log(stickIndex + ", " + stick.deltaX + ", " + stick.deltaY);
 	}
 
 	const drawSticks = function(){
 		canvasCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-		for(let i = 0; i < joysticks.length; i++){
-			if(joysticks[i].active){
+		for(let i = 0; i < sticks.length; i++){
+			if(sticks[i].active){
 				// Draw joystick base
 				canvasCtx.fillStyle = "#cccccc55";
 				canvasCtx.beginPath();
-				canvasCtx.arc(joysticks[i].startX, joysticks[i].startY, joystickRadius, 0, 2 * Math.PI);
+				canvasCtx.arc(sticks[i].startX, sticks[i].startY, stickRadius, 0, 2 * Math.PI);
 				canvasCtx.fill();
 
 				// Draw joystick
-				canvasCtx.fillStyle = joysticks[i].color;
+				canvasCtx.fillStyle = sticks[i].color;
 				canvasCtx.beginPath();
-				canvasCtx.arc(joysticks[i].startX + joysticks[i].deltaX, joysticks[i].startY + joysticks[i].deltaY, joystickRadius / 2, 0, 2 * Math.PI);
+				canvasCtx.arc(sticks[i].startX + sticks[i].deltaX, sticks[i].startY + sticks[i].deltaY, stickRadius / 2, 0, 2 * Math.PI);
 				canvasCtx.fill();
 			}
 		}
 	}
 
-	const setPositions = function(){
-		setAxis(0, joysticks[0].deltaX / joystickRadius);
-		setAxis(1, joysticks[0].deltaY / joystickRadius);
-		setAxis(2, joysticks[1].deltaX / joystickRadius);
-		setAxis(3, joysticks[1].deltaY / joystickRadius);
+	const setStickPositions = function(){
+		setAxis(0, sticks[0].deltaX / stickRadius);
+		setAxis(1, sticks[0].deltaY / stickRadius);
+		setAxis(2, sticks[1].deltaX / stickRadius);
+		setAxis(3, sticks[1].deltaY / stickRadius);
 	}
 
 	const pressButton = function(button, isPressed){
@@ -93,23 +103,23 @@ function main(){
 		emulatedGamepad.timestamp = Date.now() - startTime;
 	}
 
-	document.addEventListener("touchstart", function(e){
-		if(e.touches[0]) handleTouch(e.touches[0], 0);
-		if(e.touches[1]) handleTouch(e.touches[1], 0);
+	canvasElem.addEventListener("touchstart", function(e){
+		if(e.touches[0]) handleStickTouch(e.touches[0], touches.START);
+		if(e.touches[1]) handleStickTouch(e.touches[1], touches.START);
 		drawSticks();
-		setPositions();
+		setStickPositions();
 	}, false);
 
-	document.addEventListener("touchmove", function(e){
-		if(e.touches[0]) handleTouch(e.touches[0], 1);
-		if(e.touches[1]) handleTouch(e.touches[1], 1);
+	canvasElem.addEventListener("touchmove", function(e){
+		if(e.touches[0]) handleStickTouch(e.touches[0], touches.MOVE);
+		if(e.touches[1]) handleStickTouch(e.touches[1], touches.MOVE);
 		drawSticks();
 		setPositions();
 	}, false);
 	
-	document.addEventListener("touchend", function(e){
-		if(e.changedTouches[0]) handleTouch(e.changedTouches[0], 2);
-		if(e.changedTouches[1]) handleTouch(e.changedTouches[1], 2);
+	canvasElem.addEventListener("touchend", function(e){
+		if(e.changedTouches[0]) handleStickTouch(e.changedTouches[0], touches.END);
+		if(e.changedTouches[1]) handleStickTouch(e.changedTouches[1], touches.END);
 		drawSticks();
 		setPositions();
 	}, false);
