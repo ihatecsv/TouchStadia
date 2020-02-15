@@ -4,13 +4,11 @@
 	"description": "Use touchscreen controls to play Stadia without a controller!",
 	"content_scripts": [
 		{
-			"matches": ["https://stadia.google.com/*"],
+			"matches": ["https://stadia.google.com/*", "https://html5gamepad.com/*"],
 			"js": ["touchstadia.js"],
 			"run_at": "document_start"
 		}
 	],
-	"permissions": [
-		"https://stadia.google.com/*"
-	],
+	"permissions": ["https://stadia.google.com/*", "https://html5gamepad.com/*"],
 	"manifest_version": 2
 }
