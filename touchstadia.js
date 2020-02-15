@@ -254,6 +254,11 @@ function main(){
 		console.log("TouchStadia canvas and buttons created!");
 	}
 
+	window.onresize = function(){
+		canvasElem.width = window.innerWidth;
+		canvasElem.height = window.innerHeight;
+	}
+
 	navigator.getGamepads = function(){ // The magic happens here
 		return [emulatedGamepad, null, null, null];
 	}
