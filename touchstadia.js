@@ -157,9 +157,11 @@ function main(){
 		const stick = sticks[stickIndex];
 		switch(type){
 			case touches.START:
-				stick.active = true;
-				stick.startX = stick.endX = touch.clientX;
-				stick.startY = stick.endY = touch.clientY;
+				if(!stick.active){
+					stick.active = true;
+					stick.startX = stick.endX = touch.clientX;
+					stick.startY = stick.endY = touch.clientY;
+				}
 				break;
 			case touches.MOVE:
 				stick.endX = touch.clientX;
