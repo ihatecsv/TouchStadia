@@ -220,22 +220,22 @@ function main(){
 	}
 
 	canvasElem.addEventListener("touchstart", function(e){
-		if(e.touches[0]) handleStickTouch(e.touches[0], touches.START);
-		if(e.touches[1]) handleStickTouch(e.touches[1], touches.START);
+		if(e.touches[0] && document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) === canvasElem) handleStickTouch(e.touches[0], touches.START);
+		if(e.touches[1] && document.elementFromPoint(e.touches[1].clientX, e.touches[1].clientY) === canvasElem) handleStickTouch(e.touches[1], touches.START);
 		drawSticks();
 		setStickPositions();
 	}, false);
 
 	canvasElem.addEventListener("touchmove", function(e){
-		if(e.touches[0]) handleStickTouch(e.touches[0], touches.MOVE);
-		if(e.touches[1]) handleStickTouch(e.touches[1], touches.MOVE);
+		if(e.touches[0] && document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) === canvasElem) handleStickTouch(e.touches[0], touches.MOVE);
+		if(e.touches[1] && document.elementFromPoint(e.touches[1].clientX, e.touches[1].clientY) === canvasElem) handleStickTouch(e.touches[1], touches.MOVE);
 		drawSticks();
 		setStickPositions();
 	}, false);
 	
 	canvasElem.addEventListener("touchend", function(e){
-		if(e.changedTouches[0]) handleStickTouch(e.changedTouches[0], touches.END);
-		if(e.changedTouches[1]) handleStickTouch(e.changedTouches[1], touches.END);
+		if(e.changedTouches[0] && document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY) === canvasElem) handleStickTouch(e.changedTouches[0], touches.END);
+		if(e.changedTouches[1] && document.elementFromPoint(e.changedTouches[1].clientX, e.changedTouches[1].clientY) === canvasElem) handleStickTouch(e.changedTouches[1], touches.END);
 		drawSticks();
 		setStickPositions();
 	}, false);
