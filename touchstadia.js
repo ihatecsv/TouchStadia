@@ -11,8 +11,8 @@ function main(){
 	const startTime = Date.now();
 
 	const sticks = [
-		{ color: "#82b4ff88" }, // Left joystick
-		{ color: "#ff8a8288" }  // Right joystick
+		{ color: "#82b4ff" }, // Left joystick
+		{ color: "#ff8a82" }  // Right joystick
 	]
 
 	const emulatedGamepad = {
@@ -133,7 +133,7 @@ function main(){
 		buttonElem.innerText = emulatedGamepad.buttons[i].label;
 		buttonElem.style.cssText = "position:fixed;z-index:1001;vertical-align:middle;display:table-cell;text-align:center;color:#ffffff;";
 		buttonElem.style.cssText += "width:" + buttonDiameter + "px;height:" + buttonDiameter + "px;border-radius:" + buttonDiameter + "px;font-size:" + buttonDiameter + "px;";
-		buttonElem.style.cssText += "background-color:" + emulatedGamepad.buttons[i].color + ";";
+		buttonElem.style.cssText += "background-color:" + emulatedGamepad.buttons[i].color + opacity.toString(16) + ";";
 		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.cssText += "left:" + (emulatedGamepad.buttons[i].locLeft + buttonBorderLeftOffset) + "px;";
 		if(typeof emulatedGamepad.buttons[i].locRight !== "undefined") buttonElem.style.cssText += "right:" + (emulatedGamepad.buttons[i].locRight + buttonBorderRightOffset) + "px;";
 		if(typeof emulatedGamepad.buttons[i].locTop !== "undefined") buttonElem.style.cssText += "top:" + (emulatedGamepad.buttons[i].locTop + buttonBorderTopOffset) + "px;";
@@ -183,13 +183,13 @@ function main(){
 		for(let i = 0; i < sticks.length; i++){
 			if(sticks[i].active){
 				// Draw joystick base
-				canvasCtx.fillStyle = "#cccccc55";
+				canvasCtx.fillStyle = "#cccccc" + opacity.toString(16);
 				canvasCtx.beginPath();
 				canvasCtx.arc(sticks[i].startX, sticks[i].startY, stickRadius, 0, 2 * Math.PI);
 				canvasCtx.fill();
 
 				// Draw joystick
-				canvasCtx.fillStyle = sticks[i].color;
+				canvasCtx.fillStyle = sticks[i].color + opacity.toString(16);
 				canvasCtx.beginPath();
 				canvasCtx.arc(sticks[i].startX + sticks[i].deltaX, sticks[i].startY + sticks[i].deltaY, stickRadius / 2, 0, 2 * Math.PI);
 				canvasCtx.fill();
@@ -267,7 +267,7 @@ function main(){
 }
 
 chrome.storage.sync.get([
-	"stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset",
+	"stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset", "opacity"
 ], function(settings) {
 	let injVarTxt = "";
 	const settingsKeys = Object.keys(settings);
