@@ -242,10 +242,12 @@ function main(){
 		document.body.appendChild(canvasElem);
 		for(let i = 0; i < emulatedGamepad.buttons.length; i++){
 			document.body.appendChild(emulatedGamepad.buttons[i].buttonElem);
-			emulatedGamepad.buttons[i].buttonElem.addEventListener("touchstart", function(){
+			emulatedGamepad.buttons[i].buttonElem.addEventListener("touchstart", function(e){
+				e.preventDefault();
 				pressButton(i, true);
 			}, false);
-			emulatedGamepad.buttons[i].buttonElem.addEventListener("touchend", function(){
+			emulatedGamepad.buttons[i].buttonElem.addEventListener("touchend", function(e){
+				e.preventDefault();
 				pressButton(i, false);
 			}, false);
 		}
