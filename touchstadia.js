@@ -20,10 +20,6 @@ function main(){
 		buttons: []
 	};
 
-	canvasElem.style.cssText = "width:100%;height:100%;top:0;left:0;position:fixed;z-index:1000;overflow:hidden;touch-action:none;";
-	canvasElem.width = window.innerWidth;
-	canvasElem.height = window.innerHeight;
-
 	for(let i = 0; i < 17; i++){
 		emulatedGamepad.buttons[i] = {
 			pressed: false,
@@ -31,6 +27,10 @@ function main(){
 			value: 0
 		}
 	}
+
+	canvasElem.style.cssText = "width:100%;height:100%;top:0;left:0;position:fixed;z-index:1000;overflow:hidden;touch-action:none;";
+	canvasElem.width = window.innerWidth;
+	canvasElem.height = window.innerHeight;
 
 	const handleTouch = function(touch, state){
 		const stickIndex = touch.clientX > window.innerWidth/2 ? 1 : 0;
