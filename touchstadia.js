@@ -11,6 +11,8 @@ function main(){
 	const startTime = Date.now();
 
 	const stickRadius = 40;
+	const buttonDiameter = 60;
+	const buttonBorderOffset = 20;
 	const sticks = [
 		{ color: "#82b4ff88" }, // Left joystick
 		{ color: "#ff8a8288" }  // Right joystick
@@ -23,15 +25,127 @@ function main(){
 		timestamp: 0,
 		mapping: "standard",
 		axes: [0, 0, 0, 0],
-		buttons: []
+		buttons: [
+			{
+				label: "A", // 0
+				color: "#7dc242",
+				locRight: buttonDiameter,
+				locBottom: 0
+			},
+			{
+				label: "B", // 1
+				color: "#ed1c24",
+				locRight: 0,
+				locBottom: buttonDiameter
+			},
+			{
+				label: "X", // 2
+				color: "#24bcee",
+				locRight: buttonDiameter * 2,
+				locBottom: buttonDiameter
+			},
+			{
+				label: "Y", // 3
+				color: "#f0ea1b",
+				locRight: buttonDiameter,
+				locBottom: buttonDiameter * 2
+			},
+			{
+				label: "L1", // 4
+				color: "#636466",
+				locLeft: 0,
+				locTop: buttonDiameter
+			},
+			{
+				label: "R1", // 5
+				color: "#636466",
+				locRight: 0,
+				locTop: buttonDiameter
+			},
+			{
+				label: "L2", // 6
+				color: "#636466",
+				locLeft: 0,
+				locTop: 0
+			},
+			{
+				label: "R2", // 7
+				color: "#636466",
+				locRight: 0,
+				locTop: 0
+			},
+			{
+				label: "Se", // 8
+				color: "#7a24ee",
+				locLeft: buttonDiameter * 3,
+				locTop: 0
+			},
+			{
+				label: "St", // 9
+				color: "#7a24ee",
+				locRight: buttonDiameter * 3,
+				locTop: 0
+			},
+			{
+				label: "L3", // 10
+				color: "#636466",
+				locLeft: buttonDiameter * 5,
+				locBottom: 0
+			},
+			{
+				label: "R3", // 11
+				color: "#636466",
+				locRight: buttonDiameter * 5,
+				locBottom: 0
+			},
+			{
+				label: "⇧", // 12
+				color: "#636466",
+				locLeft: buttonDiameter,
+				locBottom: buttonDiameter * 2
+			},
+			{
+				label: "⇩", // 13
+				color: "#636466",
+				locLeft: buttonDiameter,
+				locBottom: 0
+			},
+			{
+				label: "⇦", // 14
+				color: "#636466",
+				locLeft: 0,
+				locBottom: buttonDiameter
+			},
+			{
+				label: "⇨", // 15
+				color: "#636466",
+				locLeft: buttonDiameter * 2,
+				locBottom: buttonDiameter
+			},
+			{
+				label: "H", // 16
+				color: "#ed591c",
+				locRight: buttonDiameter * 6,
+				locTop: 0
+			},
+		]
 	};
 
-	for(let i = 0; i < 17; i++){
-		emulatedGamepad.buttons[i] = {
-			pressed: false,
-			touched: false,
-			value: 0
-		}
+	for(let i = 0; i < emulatedGamepad.buttons.length; i++){
+		const buttonElem = document.createElement("div");
+		buttonElem.innerText = emulatedGamepad.buttons[i].label;
+		buttonElem.style.cssText = "position:fixed;z-index:1000;vertical-align:middle;display:table-cell;text-align:center;color:#ffffff;";
+		buttonElem.style.cssText += "width:" + buttonDiameter + "px;height:" + buttonDiameter + "px;border-radius:" + buttonDiameter + "px;font-size:" + buttonDiameter + "px;";
+		buttonElem.style.cssText += "background-color:" + emulatedGamepad.buttons[i].color + ";";
+		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.cssText += "left:" + (emulatedGamepad.buttons[i].locLeft + buttonBorderOffset) + "px;";
+		if(typeof emulatedGamepad.buttons[i].locRight !== "undefined") buttonElem.style.cssText += "right:" + (emulatedGamepad.buttons[i].locRight + buttonBorderOffset) + "px;";
+		if(typeof emulatedGamepad.buttons[i].locTop !== "undefined") buttonElem.style.cssText += "top:" + (emulatedGamepad.buttons[i].locTop + buttonBorderOffset) + "px;";
+		if(typeof emulatedGamepad.buttons[i].locBottom !== "undefined") buttonElem.style.cssText += "bottom:" + (emulatedGamepad.buttons[i].locBottom + buttonBorderOffset) + "px;";
+		emulatedGamepad.buttons[i].buttonElem = buttonElem;
+
+		emulatedGamepad.buttons[i].pressed = false;
+		emulatedGamepad.buttons[i].touched = false;
+		emulatedGamepad.buttons[i].value = 0;
 	}
 
 	canvasElem.style.cssText = "width:100%;height:100%;top:0;left:0;position:fixed;z-index:1000;overflow:hidden;touch-action:none;";
@@ -126,7 +240,16 @@ function main(){
 
 	window.onload = function(){
 		document.body.appendChild(canvasElem);
-		console.log("TouchStadia canvas created!");
+		for(let i = 0; i < emulatedGamepad.buttons.length; i++){
+			document.body.appendChild(emulatedGamepad.buttons[i].buttonElem);
+			emulatedGamepad.buttons[i].buttonElem.addEventListener("touchstart", function(){
+				pressButton(i, true);
+			}, false);
+			emulatedGamepad.buttons[i].buttonElem.addEventListener("touchend", function(){
+				pressButton(i, false);
+			}, false);
+		}
+		console.log("TouchStadia canvas and buttons created!");
 	}
 
 	navigator.getGamepads = function(){ // The magic happens here
