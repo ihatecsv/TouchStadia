@@ -5,11 +5,9 @@ function main(){
 	const startTime = Date.now();
 
 	const joystickRadius = 40;
-	const lJoystick = { color: "#82b4ff" }
-	const rJoystick = { color: "#ff8a82" }
 	const joysticks = [
-		lJoystick,
-		rJoystick
+		{ color: "#82b4ff" }, // Left joystick
+		{ color: "#ff8a82" }  // Right joystick
 	]
 
 	const emulatedGamepad = {
