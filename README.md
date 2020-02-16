@@ -28,4 +28,4 @@ All pull requests are welcome! Please feel free to improve TouchStadia as you se
 
 ## Credits
 * Thanks to `/u/revnort` for creating the amazing vector images used for the on-screen buttons and sticks!
-* Thanks to `/u/-sxp-` for creating the controller mapping fix code snippet that inspired this extension!
+* Thanks to `/u/-sxp-` for creating the [controller mapping fix code snippet](https://www.reddit.com/r/Stadia/comments/f0zir0/its_almost_happening/fh209gm/) that inspired this extension!
