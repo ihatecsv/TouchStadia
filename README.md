@@ -27,4 +27,5 @@ As of right now, [sigmaxipi/chromium-for-stadia](https://github.com/sigmaxipi/ch
 All pull requests are welcome! Please feel free to improve TouchStadia as you see fit, there's many improvements to be made!
 
 ## Credits
-Special thanks to `/u/revnort` for creating the amazing vector images used for the on-screen buttons and sticks!
+* Thanks to `/u/revnort` for creating the amazing vector images used for the on-screen buttons and sticks!
+* Thanks to `/u/-sxp-` for creating the controller mapping fix code snippet that inspired this extension!
