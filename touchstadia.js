@@ -317,7 +317,15 @@ function main(){
 }
 
 chrome.storage.sync.get([
-	"stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset", "opacity", "drawSticksEn"
+	"stickRadius",
+	"buttonDiameter",
+	"buttonBorderLeftOffset",
+	"buttonBorderRightOffset",
+	"buttonBorderTopOffset",
+	"buttonBorderBottomOffset",
+	"opacity",
+	"drawSticksEn",
+	"disableTS"
 ], function(settings) {
 	settings.extUrl = chrome.runtime.getURL("/");
 	let injVarTxt = "";
@@ -332,6 +340,7 @@ chrome.storage.sync.get([
 			console.error("Invalid setting type!");
 		}
 	}
+	if(settings.disableTS) return;
 	const injScript = document.createElement("script");
 	injScript.appendChild(document.createTextNode("(" + (main + "").slice(0, 16) + injVarTxt + (main + "").slice(16) + ")();"));
 	(document.body || document.head || document.documentElement).appendChild(injScript);

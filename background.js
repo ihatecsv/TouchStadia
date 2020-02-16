@@ -7,7 +7,8 @@ chrome.runtime.onInstalled.addListener(function() {
         "buttonBorderTopOffset": 80,
         "buttonBorderBottomOffset": 30,
         "opacity": 255,
-        "drawSticksEn" : false
+        "drawSticksEn" : false,
+        "disableTS": false
     };
     chrome.storage.sync.set(startParams, function() {
         console.log("Set start params!");
