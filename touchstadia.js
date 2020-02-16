@@ -278,8 +278,8 @@ function main(){
 	
 	canvasElem.addEventListener("touchend", function(e){
 		e.preventDefault();
-		if(e.changedTouches[0] && document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) === canvasElem) handleStickTouch(e.changedTouches[0], touches.END);
-		if(e.changedTouches[1] && document.elementFromPoint(e.touches[1].clientX, e.touches[1].clientY) === canvasElem) handleStickTouch(e.changedTouches[1], touches.END);
+		if(e.changedTouches[0] && document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY) === canvasElem) handleStickTouch(e.changedTouches[0], touches.END);
+		if(e.changedTouches[1] && document.elementFromPoint(e.changedTouches[1].clientX, e.changedTouches[1].clientY) === canvasElem) handleStickTouch(e.changedTouches[1], touches.END);
 		setStickPositions();
 		drawSticks();
 	}, false);
