@@ -221,6 +221,7 @@ function main(){
 	}
 
 	const drawSticks = function(){
+		if(!drawSticksEn) return;
 		canvasCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 		for(let i = 0; i < sticks.length; i++){
 			if(sticks[i].active){
@@ -316,14 +317,14 @@ function main(){
 }
 
 chrome.storage.sync.get([
-	"stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset", "opacity"
+	"stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset", "opacity", "drawSticksEn"
 ], function(settings) {
 	settings.extUrl = chrome.runtime.getURL("/");
 	let injVarTxt = "";
 	const settingsKeys = Object.keys(settings);
 	console.log(settings);
 	for (const key of settingsKeys) {
-		if(typeof settings[key] === "number"){
+		if(typeof settings[key] === "number" || typeof settings[key] === "boolean"){
 			injVarTxt += "const " + key + " = " + settings[key] + ";";
 		}else if(typeof settings[key] === "string"){
 			injVarTxt += "const " + key + " = \"" + settings[key] + "\";";

@@ -1,5 +1,5 @@
 chrome.storage.sync.get([
-    "stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset", "opacity"
+    "stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset", "opacity", "drawSticksEn"
 ], function(settings) {
     const stickRadiusElem = document.getElementById("stick-radius");
     const buttonDiameterElem = document.getElementById("button-diameter");
@@ -8,6 +8,7 @@ chrome.storage.sync.get([
     const buttonBorderTopOffsetElem = document.getElementById("button-border-top-offset");
     const buttonBorderBottomOffsetElem = document.getElementById("button-border-bottom-offset");
     const opacityElem = document.getElementById("opacity");
+    const drawSticksEnElem = document.getElementById("draw-sticks-en");
     const applyButtonElem = document.getElementById("apply-button");
 
     stickRadiusElem.value = settings.stickRadius;
@@ -17,6 +18,7 @@ chrome.storage.sync.get([
     buttonBorderTopOffsetElem.value = settings.buttonBorderTopOffset;
     buttonBorderBottomOffsetElem.value = settings.buttonBorderBottomOffset;
     opacityElem.value = settings.opacity;
+    drawSticksEnElem.checked = settings.drawSticksEn;
 
     applyButtonElem.onclick = function(){
         const startParams = {
@@ -26,7 +28,8 @@ chrome.storage.sync.get([
             "buttonBorderRightOffset": parseInt(buttonBorderRightOffsetElem.value),
             "buttonBorderTopOffset": parseInt(buttonBorderTopOffsetElem.value),
             "buttonBorderBottomOffset": parseInt(buttonBorderBottomOffsetElem.value),
-            "opacity": parseInt(opacityElem.value)
+            "opacity": parseInt(opacityElem.value),
+            "drawSticksEn": drawSticksEnElem.checked
         };
         chrome.storage.sync.set(startParams, function(){
             console.log("Set params!");
