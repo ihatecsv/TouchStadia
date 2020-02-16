@@ -1,6 +1,6 @@
 {
 	"name": "TouchStadia",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "TouchStadia is a Chrome Extension which adds on-screen joystick control to Stadia for touchscreen devices!",
 	"background": {
 		"scripts": ["background.js"],
@@ -35,5 +35,8 @@
 		"48": "img/ts-48.png",
 		"128": "img/ts-128.png"
 	},
+	"web_accessible_resources": [
+		"img/controls/*.svg"
+	],
 	"manifest_version": 2
 }

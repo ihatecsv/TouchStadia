@@ -20,13 +20,13 @@ chrome.storage.sync.get([
 
     applyButtonElem.onclick = function(){
         const startParams = {
-            "stickRadius": stickRadiusElem.value,
-            "buttonDiameter": buttonDiameterElem.value,
-            "buttonBorderLeftOffset": buttonBorderLeftOffsetElem.value,
-            "buttonBorderRightOffset": buttonBorderRightOffsetElem.value,
-            "buttonBorderTopOffset": buttonBorderTopOffsetElem.value,
-            "buttonBorderBottomOffset": buttonBorderBottomOffsetElem.value,
-            "opacity": opacityElem.value
+            "stickRadius": parseInt(stickRadiusElem.value),
+            "buttonDiameter": parseInt(buttonDiameterElem.value),
+            "buttonBorderLeftOffset": parseInt(buttonBorderLeftOffsetElem.value),
+            "buttonBorderRightOffset": parseInt(buttonBorderRightOffsetElem.value),
+            "buttonBorderTopOffset": parseInt(buttonBorderTopOffsetElem.value),
+            "buttonBorderBottomOffset": parseInt(buttonBorderBottomOffsetElem.value),
+            "opacity": parseInt(opacityElem.value)
         };
         chrome.storage.sync.set(startParams, function(){
             console.log("Set params!");

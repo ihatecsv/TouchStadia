@@ -10,6 +10,8 @@ function main(){
 	
 	const startTime = Date.now();
 
+	const zIndex = 6000;
+
 	const sticks = [
 		{ color: "#82b4ff" }, // Left joystick
 		{ color: "#ff8a82" }  // Right joystick
@@ -27,125 +29,165 @@ function main(){
 				label: "A", // 0
 				color: "#7dc242",
 				locRight: buttonDiameter,
-				locBottom: 0
+				locBottom: 0,
+				scale: 1,
+				img: "img/controls/A"
 			},
 			{
 				label: "B", // 1
 				color: "#ed1c24",
 				locRight: 0,
-				locBottom: buttonDiameter
+				locBottom: buttonDiameter,
+				scale: 1,
+				img: "img/controls/B"
 			},
 			{
 				label: "X", // 2
 				color: "#24bcee",
 				locRight: buttonDiameter * 2,
-				locBottom: buttonDiameter
+				locBottom: buttonDiameter,
+				scale: 1,
+				img: "img/controls/X"
 			},
 			{
 				label: "Y", // 3
 				color: "#f0ea1b",
 				locRight: buttonDiameter,
-				locBottom: buttonDiameter * 2
+				locBottom: buttonDiameter * 2,
+				scale: 1,
+				img: "img/controls/Y"
 			},
 			{
 				label: "L1", // 4
 				color: "#636466",
 				locLeft: 0,
-				locTop: buttonDiameter
+				locTop: buttonDiameter * 1.4,
+				scale: 2,
+				img: "img/controls/L1"
 			},
 			{
 				label: "R1", // 5
 				color: "#636466",
 				locRight: 0,
-				locTop: buttonDiameter
+				locTop: buttonDiameter * 1.4,
+				scale: 2,
+				img: "img/controls/R1"
 			},
 			{
 				label: "L2", // 6
 				color: "#636466",
 				locLeft: 0,
-				locTop: 0
+				locTop: 0,
+				scale: 2,
+				img: "img/controls/L2"
 			},
 			{
 				label: "R2", // 7
 				color: "#636466",
 				locRight: 0,
-				locTop: 0
+				locTop: 0,
+				scale: 2,
+				img: "img/controls/R2"
 			},
 			{
 				label: "Se", // 8
 				color: "#7a24ee",
-				locLeft: buttonDiameter * 3,
-				locTop: 0
+				locLeft: buttonDiameter * 5,
+				locTop: buttonDiameter * 1.1,
+				scale: 1.2,
+				img: "img/controls/select"
 			},
 			{
 				label: "St", // 9
 				color: "#7a24ee",
-				locRight: buttonDiameter * 3,
-				locTop: 0
+				locRight: buttonDiameter * 5,
+				locTop: buttonDiameter * 1.1,
+				scale: 1.2,
+				img: "img/controls/start"
 			},
 			{
 				label: "L3", // 10
 				color: "#636466",
 				locLeft: buttonDiameter * 5,
-				locBottom: 0
+				locBottom: 0,
+				scale: 1,
+				img: "img/controls/L3"
 			},
 			{
 				label: "R3", // 11
 				color: "#636466",
 				locRight: buttonDiameter * 5,
-				locBottom: 0
+				locBottom: 0,
+				scale: 1,
+				img: "img/controls/R3"
 			},
 			{
 				label: "⇧", // 12
 				color: "#636466",
 				locLeft: buttonDiameter,
-				locBottom: buttonDiameter * 2
+				locBottom: buttonDiameter * 2,
+				scale: 1,
+				img: "img/controls/up"
 			},
 			{
 				label: "⇩", // 13
 				color: "#636466",
 				locLeft: buttonDiameter,
-				locBottom: 0
+				locBottom: 0,
+				scale: 1,
+				img: "img/controls/down"
 			},
 			{
 				label: "⇦", // 14
 				color: "#636466",
 				locLeft: 0,
-				locBottom: buttonDiameter
+				locBottom: buttonDiameter,
+				scale: 1,
+				img: "img/controls/left"
 			},
 			{
 				label: "⇨", // 15
 				color: "#636466",
 				locLeft: buttonDiameter * 2,
-				locBottom: buttonDiameter
+				locBottom: buttonDiameter,
+				scale: 1,
+				img: "img/controls/right"
 			},
 			{
 				label: "H", // 16
 				color: "#ed591c",
-				locRight: buttonDiameter * 6,
-				locTop: 0
+				locLeft: window.innerWidth/2 - buttonDiameter/2 - buttonBorderLeftOffset,
+				locBottom: 0,
+				scale: 1,
+				img: "img/controls/home",
+				dynUpd: true
 			},
 		]
 	};
 
+	const imgExt = ".svg";
+
 	for(let i = 0; i < emulatedGamepad.buttons.length; i++){
-		const buttonElem = document.createElement("div");
-		buttonElem.innerText = emulatedGamepad.buttons[i].label;
-		buttonElem.style.cssText = "position:fixed;z-index:1001;vertical-align:middle;display:table-cell;text-align:center;color:#ffffff;";
-		buttonElem.style.cssText += "width:" + buttonDiameter + "px;height:" + buttonDiameter + "px;border-radius:" + buttonDiameter + "px;font-size:" + buttonDiameter + "px;";
-		buttonElem.style.cssText += "background-color:" + emulatedGamepad.buttons[i].color + opacity.toString(16) + ";";
-		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.cssText += "left:" + (emulatedGamepad.buttons[i].locLeft + buttonBorderLeftOffset) + "px;";
-		if(typeof emulatedGamepad.buttons[i].locRight !== "undefined") buttonElem.style.cssText += "right:" + (emulatedGamepad.buttons[i].locRight + buttonBorderRightOffset) + "px;";
-		if(typeof emulatedGamepad.buttons[i].locTop !== "undefined") buttonElem.style.cssText += "top:" + (emulatedGamepad.buttons[i].locTop + buttonBorderTopOffset) + "px;";
-		if(typeof emulatedGamepad.buttons[i].locBottom !== "undefined") buttonElem.style.cssText += "bottom:" + (emulatedGamepad.buttons[i].locBottom + buttonBorderBottomOffset) + "px;";
-		emulatedGamepad.buttons[i].buttonElem = buttonElem;
+		const buttonElem = document.createElement("img");
+
+		buttonElem.src = extUrl + emulatedGamepad.buttons[i].img + imgExt;
+		buttonElem.style.cssText = "position:fixed;z-index:" + (zIndex+1) + ";";
+		buttonElem.style.cssText += "width:" + buttonDiameter*emulatedGamepad.buttons[i].scale + "px;";
+		buttonElem.style.cssText += "opacity:" + ((opacity/255) * 100) + "%;";
+
+		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.left = (emulatedGamepad.buttons[i].locLeft + buttonBorderLeftOffset) + "px";
+		if(typeof emulatedGamepad.buttons[i].locRight !== "undefined") buttonElem.style.right = (emulatedGamepad.buttons[i].locRight + buttonBorderRightOffset) + "px";
+		if(typeof emulatedGamepad.buttons[i].locTop !== "undefined") buttonElem.style.top = (emulatedGamepad.buttons[i].locTop + buttonBorderTopOffset) + "px";
+		if(typeof emulatedGamepad.buttons[i].locBottom !== "undefined") buttonElem.style.bottom = (emulatedGamepad.buttons[i].locBottom + buttonBorderBottomOffset) + "px";
 
 		emulatedGamepad.buttons[i].pressed = false;
 		emulatedGamepad.buttons[i].touched = false;
 		emulatedGamepad.buttons[i].value = 0;
+
+		emulatedGamepad.buttons[i].buttonElem = buttonElem;
 	}
 
-	canvasElem.style.cssText = "width:100%;height:100%;top:0;left:0;position:fixed;z-index:1000;overflow:hidden;touch-action:none;";
+	canvasElem.style.cssText = "width:100%;height:100%;top:0;left:0;position:fixed;z-index:" + zIndex +";overflow:hidden;touch-action:none;";
 	canvasElem.width = window.innerWidth;
 	canvasElem.height = window.innerHeight;
 
@@ -208,6 +250,7 @@ function main(){
 		emulatedGamepad.buttons[button].pressed = isPressed;
 		emulatedGamepad.buttons[button].touched = isPressed;
 		emulatedGamepad.buttons[button].value = isPressed ? 1 : 0;
+		emulatedGamepad.buttons[button].buttonElem.style.filter = isPressed ? "brightness(0)" : "";
 		emulatedGamepad.timestamp = Date.now() - startTime;
 	}
 
@@ -259,6 +302,12 @@ function main(){
 	window.onresize = function(){
 		canvasElem.width = window.innerWidth;
 		canvasElem.height = window.innerHeight;
+		for(let i = 0; i < emulatedGamepad.buttons.length; i++){
+			if(emulatedGamepad.buttons[i].dynUpd){ //TODO: This is gross, do something different
+				const newLoc = (window.innerWidth/2 - buttonDiameter/2) + "px";
+				emulatedGamepad.buttons[i].buttonElem.style.left = newLoc;
+			}
+		}
 	}
 
 	navigator.getGamepads = function(){ // The magic happens here
@@ -269,10 +318,18 @@ function main(){
 chrome.storage.sync.get([
 	"stickRadius", "buttonDiameter", "buttonBorderLeftOffset", "buttonBorderRightOffset", "buttonBorderTopOffset", "buttonBorderBottomOffset", "opacity"
 ], function(settings) {
+	settings.extUrl = chrome.runtime.getURL("/");
 	let injVarTxt = "";
 	const settingsKeys = Object.keys(settings);
+	console.log(settings);
 	for (const key of settingsKeys) {
-		injVarTxt += "const " + key + " = " + settings[key] + ";";
+		if(typeof settings[key] === "number"){
+			injVarTxt += "const " + key + " = " + settings[key] + ";";
+		}else if(typeof settings[key] === "string"){
+			injVarTxt += "const " + key + " = \"" + settings[key] + "\";";
+		}else{
+			console.error("Invalid setting type!");
+		}
 	}
 	const injScript = document.createElement("script");
 	injScript.appendChild(document.createTextNode("(" + (main + "").slice(0, 16) + injVarTxt + (main + "").slice(16) + ")();"));

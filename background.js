@@ -4,9 +4,9 @@ chrome.runtime.onInstalled.addListener(function() {
         "buttonDiameter": 70,
         "buttonBorderLeftOffset": 30,
         "buttonBorderRightOffset": 30,
-        "buttonBorderTopOffset": 30,
+        "buttonBorderTopOffset": 80,
         "buttonBorderBottomOffset": 30,
-        "opacity": 100
+        "opacity": 255
     };
     chrome.storage.sync.set(startParams, function() {
         console.log("Set start params!");
