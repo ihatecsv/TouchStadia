@@ -1,12 +1,14 @@
 ![TouchStadia logo](/img/ts-128.png?raw=true "TouchStadia logo")
 # TouchStadia
+[![TouchStadia in Chrome Web Store](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_206x58.png)](https://chrome.google.com/webstore/detail/touchstadia/kdkboloommjpbahkdlhengbghlhcejaj)
+
 TouchStadia is a Chrome Extension which adds on-screen joystick control to Stadia for touchscreen devices!
 
 ## Demo
 [![Demo video](https://img.youtube.com/vi/AmnuVkkQBu4/0.jpg)](https://www.youtube.com/watch?v=AmnuVkkQBu4)
 
 ## Installation
-TouchStadia will be available on the Chrome Web Store (pending review!) You can also download this repository and load it as an unpacked extension.
+TouchStadia is available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/touchstadia/kdkboloommjpbahkdlhengbghlhcejaj)! You can also download this repository and load it as an unpacked extension, though this is not recommended!
 
 ### Loading as an unpacked extension
 1. Click the green "Clone or download" button near the top of this page, then click "Download ZIP".
@@ -15,7 +17,7 @@ TouchStadia will be available on the Chrome Web Store (pending review!) You can 
 4. Activate "Developer mode" in the top right, and click "Load unpacked".
 5. Navigate to the "TouchStadia" folder created earlier, and select that folder!
 
-Keep in mind that if you install the extension this way, you will not get updates for TouchStadia. You will need to repeat this process to update your extension. It is preferred that you use the Chrome Web Store version.
+Keep in mind that if you install the extension this way, you will not get updates for TouchStadia. You will need to repeat this process to update your extension. It is preferred that you use the [Chrome Web Store version](https://chrome.google.com/webstore/detail/touchstadia/kdkboloommjpbahkdlhengbghlhcejaj).
 
 ## Known issues
 * Starting games (aside from the top jumbotron game) requires disabling TouchStadia from the options, launching the game, then re-enabling TouchStadia. ([#5](https://github.com/ihatecsv/TouchStadia/issues/5))
