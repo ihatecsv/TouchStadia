@@ -4,7 +4,7 @@ function main(){
 		MOVE: "move",
 		END: "end"
 	}
-
+	const touchStadiaElem = document.createElement("span");
 	const canvasElem = document.createElement("canvas");
 	const canvasCtx = canvasElem.getContext("2d");
 	
@@ -190,6 +190,7 @@ function main(){
 	canvasElem.style.cssText = "width:100%;height:100%;top:0;left:0;position:fixed;z-index:" + zIndex +";overflow:hidden;touch-action:none;";
 	canvasElem.width = window.innerWidth;
 	canvasElem.height = window.innerHeight;
+	touchStadiaElem.style.display = "none";
 
 	const handleStickTouch = function(touch, type){
 		const stickIndex = touch.clientX > window.innerWidth/2 ? 1 : 0;
@@ -285,9 +286,10 @@ function main(){
 	}, false);
 
 	window.onload = function(){
-		document.body.appendChild(canvasElem);
+		document.body.appendChild(touchStadiaElem);
+		touchStadiaElem.appendChild(canvasElem);
 		for(let i = 0; i < emulatedGamepad.buttons.length; i++){
-			document.body.appendChild(emulatedGamepad.buttons[i].buttonElem);
+			touchStadiaElem.appendChild(emulatedGamepad.buttons[i].buttonElem);
 			emulatedGamepad.buttons[i].buttonElem.addEventListener("touchstart", function(e){
 				e.preventDefault();
 				pressButton(i, true);
@@ -310,6 +312,14 @@ function main(){
 			}
 		}
 	}
+	
+	setInterval(function(){ //TODO: listen to an event instead...
+		if(window.location.pathname.substr(1, 6) !== "player"){
+			touchStadiaElem.style.display = "none";
+		}else{
+			touchStadiaElem.style.display = "inline";
+		}
+	}, 2000);
 
 	navigator.getGamepads = function(){ // The magic happens here
 		return [emulatedGamepad, null, null, null];
