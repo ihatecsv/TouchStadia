@@ -261,6 +261,14 @@ function main(){
 		emulatedGamepad.timestamp = Date.now() - startTime;
 	}
 
+	const updateTSVisibility = function(){
+		if(window.location.pathname.substr(1, 6) !== "player"){
+			touchStadiaElem.style.display = "none";
+		}else{
+			touchStadiaElem.style.display = "inline";
+		}
+	}
+
 	canvasElem.addEventListener("touchstart", function(e){
 		e.preventDefault();
 		if(e.touches[0] && document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) === canvasElem) handleStickTouch(e.touches[0], touches.START);
@@ -313,13 +321,8 @@ function main(){
 		}
 	}
 	
-	setInterval(function(){ //TODO: listen to an event instead...
-		if(window.location.pathname.substr(1, 6) !== "player"){
-			touchStadiaElem.style.display = "none";
-		}else{
-			touchStadiaElem.style.display = "inline";
-		}
-	}, 2000);
+	setInterval(updateTSVisibility, 3000); //TODO: We can do better!
+	window.addEventListener("popstate", updateTSVisibility);
 
 	navigator.getGamepads = function(){ // The magic happens here
 		return [emulatedGamepad, null, null, null];
