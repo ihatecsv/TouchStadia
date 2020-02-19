@@ -20,7 +20,6 @@ TouchStadia is available on the [Chrome Web Store](https://chrome.google.com/web
 Keep in mind that if you install the extension this way, you will not get updates for TouchStadia. You will need to repeat this process to update your extension. It is preferred that you use the [Chrome Web Store version](https://chrome.google.com/webstore/detail/touchstadia/kdkboloommjpbahkdlhengbghlhcejaj).
 
 ## Known issues
-* Starting games (aside from the top jumbotron game) requires disabling TouchStadia from the options, launching the game, then re-enabling TouchStadia. ([#5](https://github.com/ihatecsv/TouchStadia/issues/5))
 * General latency issues. Optimizations are being worked on!
 
 ## Testing
