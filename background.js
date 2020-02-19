@@ -1,4 +1,17 @@
 chrome.runtime.onInstalled.addListener(function() {
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+        chrome.declarativeContent.onPageChanged.addRules([{
+            conditions: [
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: {hostEquals: "stadia.google.com"},
+                }),
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: {hostEquals: "html5gamepad.com"},
+                }),
+            ],
+            actions: [new chrome.declarativeContent.ShowPageAction()]
+        }]);
+    });
     const startParams = {
         "stickRadius": 50,
         "buttonDiameter": 70,
@@ -29,18 +42,5 @@ chrome.runtime.onInstalled.addListener(function() {
         chrome.storage.sync.set(startParams, function() {
             console.log("TouchStadia: Set start params!");
         });
-    });
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-        chrome.declarativeContent.onPageChanged.addRules([{
-            conditions: [
-                new chrome.declarativeContent.PageStateMatcher({
-                    pageUrl: {hostEquals: "stadia.google.com"},
-                }),
-                new chrome.declarativeContent.PageStateMatcher({
-                    pageUrl: {hostEquals: "html5gamepad.com"},
-                }),
-            ],
-            actions: [new chrome.declarativeContent.ShowPageAction()]
-        }]);
     });
 });
