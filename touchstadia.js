@@ -330,7 +330,7 @@ function main(){
 	navigator.getGamepads = function(){ // The magic happens here
 		const originalGamepads = originalGetGamepads.apply(navigator);
 		const modifiedGamepads = [emulatedGamepad, null, null, null];
-		if(originalGamepads[2] !== null && !fourGamepadsWarningShown){
+		if(originalGamepads[3] !== null && !fourGamepadsWarningShown){
 			fourGamepadsWarningShown = true;
 			alert("TouchStadia: Four USB gamepads have been detected. The fourth gamepad will not function, as TouchStadia requires a gamepad slot for itself.");
 		}
