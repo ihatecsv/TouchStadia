@@ -7,18 +7,6 @@ TouchStadia is a Chrome Extension which adds on-screen joystick control to Stadi
 ## Demo
 [![Demo video](https://img.youtube.com/vi/AmnuVkkQBu4/0.jpg)](https://www.youtube.com/watch?v=AmnuVkkQBu4)
 
-## Installation
-TouchStadia is available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/touchstadia/kdkboloommjpbahkdlhengbghlhcejaj)! You can also download this repository and load it as an unpacked extension, though this is not recommended!
-
-### Loading as an unpacked extension
-1. Click the green "Clone or download" button near the top of this page, then click "Download ZIP".
-2. Extract the contents of this ZIP file into a folder named "TouchStadia" somewhere on your PC.
-3. Type `chrome://extensions` into the Chrome address bar (omnibox) and hit ENTER.
-4. Activate "Developer mode" in the top right, and click "Load unpacked".
-5. Navigate to the "TouchStadia" folder created earlier, and select that folder!
-
-Keep in mind that if you install the extension this way, you will not get updates for TouchStadia. You will need to repeat this process to update your extension. It is preferred that you use the [Chrome Web Store version](https://chrome.google.com/webstore/detail/touchstadia/kdkboloommjpbahkdlhengbghlhcejaj).
-
 ## Known issues
 * General latency issues. Optimizations are being worked on!
 
