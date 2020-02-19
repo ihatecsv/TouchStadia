@@ -203,7 +203,7 @@ function main(){
 	const handleStickTouch = function(touchEvent, type){
 		const touches = type == 2 ? touchEvent.changedTouches : touchEvent.touches;
 		for(let i = 0; i < touches.length; i++){
-			if(touches[i].target !== canvasElem) return;
+			if(touches[i].target !== canvasElem) continue;
 			const clientX = touches[i].clientX;
 			const clientY = touches[i].clientY;
 			const stickIndex = clientX > window.innerWidth/2 ? 1 : 0;
