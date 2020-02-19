@@ -301,7 +301,11 @@ function main(){
 		emulatedGamepad.buttons[button].pressed = isPressed;
 		emulatedGamepad.buttons[button].touched = isPressed;
 		emulatedGamepad.buttons[button].value = isPressed ? 1 : 0;
-		emulatedGamepad.buttons[button].buttonElem.style.filter = isPressed ? "brightness(0)" : "";
+		if(enableColors){
+			emulatedGamepad.buttons[button].buttonElem.style.filter = isPressed ? "brightness(0)" : "drop-shadow(0 0 0 " + emulatedGamepad.buttons[button].color + ")";
+		}else{
+			emulatedGamepad.buttons[button].buttonElem.style.filter = isPressed ? "brightness(0)" : "";
+		}
 		emulatedGamepad.timestamp = Date.now() - startTime;
 	}
 
