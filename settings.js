@@ -6,6 +6,7 @@ chrome.storage.sync.get([
     "buttonBorderTopOffset",
     "buttonBorderBottomOffset",
     "opacity",
+    "enableColors",
     "enableDrawSticks",
     "disableTouchStadia",
     "firstRun"
@@ -20,6 +21,7 @@ chrome.storage.sync.get([
     const buttonBorderTopOffsetElem = document.getElementById("button-border-top-offset");
     const buttonBorderBottomOffsetElem = document.getElementById("button-border-bottom-offset");
     const opacityElem = document.getElementById("opacity");
+    const enableColorsElem = document.getElementById("enable-colors");
     const enableDrawSticksElem = document.getElementById("enable-draw-sticks");
     const disableTouchStadiaElem = document.getElementById("disable-touchstadia");
     const applyButtonElem = document.getElementById("apply-button");
@@ -37,6 +39,7 @@ chrome.storage.sync.get([
     buttonBorderTopOffsetElem.value = settings.buttonBorderTopOffset;
     buttonBorderBottomOffsetElem.value = settings.buttonBorderBottomOffset;
     opacityElem.value = settings.opacity;
+    enableColorsElem.checked = settings.enableColors;
     enableDrawSticksElem.checked = settings.enableDrawSticks;
     disableTouchStadiaElem.checked = settings.disableTouchStadia;
 
@@ -57,6 +60,7 @@ chrome.storage.sync.get([
             "buttonBorderTopOffset": parseInt(buttonBorderTopOffsetElem.value),
             "buttonBorderBottomOffset": parseInt(buttonBorderBottomOffsetElem.value),
             "opacity": parseInt(opacityElem.value),
+            "enableColors": enableColorsElem.checked,
             "enableDrawSticks": enableDrawSticksElem.checked,
             "disableTouchStadia": disableTouchStadiaElem.checked,
         };

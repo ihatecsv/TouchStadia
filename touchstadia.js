@@ -99,7 +99,7 @@ function main(){
 			},
 			{
 				label: "Se", // 8
-				color: "#7a24ee",
+				color: "#636466",
 				locLeft: buttonDiameter * 5,
 				locTop: buttonDiameter * 1.1,
 				scale: 1.2,
@@ -107,7 +107,7 @@ function main(){
 			},
 			{
 				label: "St", // 9
-				color: "#7a24ee",
+				color: "#636466",
 				locRight: buttonDiameter * 5,
 				locTop: buttonDiameter * 1.1,
 				scale: 1.2,
@@ -115,7 +115,7 @@ function main(){
 			},
 			{
 				label: "L3", // 10
-				color: "#636466",
+				color: "#7a24ee",
 				locLeft: buttonDiameter * 5,
 				locBottom: 0,
 				scale: 1,
@@ -123,7 +123,7 @@ function main(){
 			},
 			{
 				label: "R3", // 11
-				color: "#636466",
+				color: "#7a24ee",
 				locRight: buttonDiameter * 5,
 				locBottom: 0,
 				scale: 1,
@@ -182,6 +182,7 @@ function main(){
 		buttonElem.style.cssText = "position:fixed;z-index:" + (zIndex+1) + ";";
 		buttonElem.style.cssText += "width:" + buttonDiameter*emulatedGamepad.buttons[i].scale + "px;";
 		buttonElem.style.cssText += "opacity:" + ((opacity/255) * 100) + "%;";
+		if(enableColors) buttonElem.style.cssText += "filter:drop-shadow(0 0 0 " + emulatedGamepad.buttons[i].color + ");"
 
 		if(typeof emulatedGamepad.buttons[i].locLeft !== "undefined") buttonElem.style.left = (emulatedGamepad.buttons[i].locLeft + buttonBorderLeftOffset) + "px";
 		if(typeof emulatedGamepad.buttons[i].locRight !== "undefined") buttonElem.style.right = (emulatedGamepad.buttons[i].locRight + buttonBorderRightOffset) + "px";
@@ -397,6 +398,7 @@ chrome.storage.sync.get([
 	"buttonBorderTopOffset",
 	"buttonBorderBottomOffset",
 	"opacity",
+	"enableColors",
 	"enableDrawSticks",
 	"disableTouchStadia"
 ], function(settings) {

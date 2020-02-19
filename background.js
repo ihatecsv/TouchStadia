@@ -20,6 +20,7 @@ chrome.runtime.onInstalled.addListener(function() {
         "buttonBorderTopOffset": 80,
         "buttonBorderBottomOffset": 30,
         "opacity": 255,
+        "enableColors": false,
         "enableDrawSticks" : false,
         "disableTouchStadia": false,
         "firstRun": true
@@ -32,6 +33,7 @@ chrome.runtime.onInstalled.addListener(function() {
         "buttonBorderTopOffset",
         "buttonBorderBottomOffset",
         "opacity",
+        "enableColors",
         "enableDrawSticks",
         "disableTouchStadia",
         "firstRun"
