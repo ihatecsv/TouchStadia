@@ -325,8 +325,25 @@ function main(){
 	window.addEventListener("popstate", updateTSVisibility);
 	updateTSVisibility();
 
+	let fourGamepadsWarningShown = false;
+	const originalGetGamepads = navigator.getGamepads;
 	navigator.getGamepads = function(){ // The magic happens here
-		return [emulatedGamepad, null, null, null];
+		const originalGamepads = originalGetGamepads.apply(navigator);
+		const modifiedGamepads = [emulatedGamepad, null, null, null];
+		if(originalGamepads[2] !== null && !fourGamepadsWarningShown){
+			fourGamepadsWarningShown = true;
+			alert("TouchStadia: Four USB gamepads have been detected. The fourth gamepad will not function, as TouchStadia requires a gamepad slot for itself.");
+		}
+		for(let i = 0; i < 3; i++){
+			if(originalGamepads[i] !== null){
+				modifiedGamepads[i+1] = {};
+				for(let property in originalGamepads[i]){
+					modifiedGamepads[i+1][property] = originalGamepads[i][property];
+				}
+				modifiedGamepads[i+1].index++;
+			} 
+		}
+		return modifiedGamepads;
 	}
 }
 
