@@ -265,7 +265,7 @@ function main(){
 		if(window.location.pathname.substr(1, 6) !== "player"){
 			touchStadiaElem.style.display = "none";
 		}else{
-			touchStadiaElem.style.display = "inline";
+			touchStadiaElem.style.display = "initial";
 		}
 	}
 
@@ -307,7 +307,7 @@ function main(){
 				pressButton(i, false);
 			}, false);
 		}
-		console.log("TouchStadia canvas and buttons created!");
+		console.log("TouchStadia: Canvas and buttons created!");
 	}
 
 	window.onresize = function(){

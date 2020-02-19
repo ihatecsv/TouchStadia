@@ -7,8 +7,12 @@ chrome.storage.sync.get([
     "buttonBorderBottomOffset",
     "opacity",
     "drawSticksEn",
-    "disableTS"
+    "disableTS",
+    "firstRun"
 ], function(settings) {
+    const firstRunNotificationElem = document.getElementById("first-run-notification");
+    const firstRunNotificationCloseButtonElem = document.getElementById("first-run-notification-close-button");
+    const settingsElem = document.getElementById("settings");
     const stickRadiusElem = document.getElementById("stick-radius");
     const buttonDiameterElem = document.getElementById("button-diameter");
     const buttonBorderLeftOffsetElem = document.getElementById("button-border-left-offset");
@@ -20,6 +24,12 @@ chrome.storage.sync.get([
     const disableTSElem = document.getElementById("disable-ts");
     const applyButtonElem = document.getElementById("apply-button");
 
+    if(settings.firstRun){
+        settingsElem.style.display = "none";
+    }else{
+        firstRunNotificationElem.style.display = "none";
+    }
+
     stickRadiusElem.value = settings.stickRadius;
     buttonDiameterElem.value = settings.buttonDiameter;
     buttonBorderLeftOffsetElem.value = settings.buttonBorderLeftOffset;
@@ -29,6 +39,14 @@ chrome.storage.sync.get([
     opacityElem.value = settings.opacity;
     drawSticksEnElem.checked = settings.drawSticksEn;
     disableTSElem.checked = settings.disableTS;
+
+    firstRunNotificationCloseButtonElem.onclick = function(){
+        firstRunNotificationElem.style.display = "none";
+        settingsElem.style.display = "initial";
+        chrome.storage.sync.set({"firstRun": false}, function(){
+            console.log("TouchStadia: First run completed!");
+        });
+    }
 
     applyButtonElem.onclick = function(){
         const startParams = {
@@ -43,7 +61,7 @@ chrome.storage.sync.get([
             "disableTS": disableTSElem.checked,
         };
         chrome.storage.sync.set(startParams, function(){
-            console.log("Set params!");
+            console.log("TouchStadia: Set options!");
             chrome.tabs.reload();
         });
     }
