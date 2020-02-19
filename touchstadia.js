@@ -262,7 +262,7 @@ function main(){
 	}
 
 	const updateTSVisibility = function(){
-		if(window.location.pathname.substr(1, 6) !== "player"){
+		if(window.location.host == "stadia.google.com" && window.location.pathname.substr(1, 6) !== "player"){
 			touchStadiaElem.style.display = "none";
 		}else{
 			touchStadiaElem.style.display = "initial";
@@ -323,6 +323,7 @@ function main(){
 	
 	setInterval(updateTSVisibility, 3000); //TODO: We can do better!
 	window.addEventListener("popstate", updateTSVisibility);
+	updateTSVisibility();
 
 	navigator.getGamepads = function(){ // The magic happens here
 		return [emulatedGamepad, null, null, null];
