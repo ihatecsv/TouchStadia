@@ -7,9 +7,6 @@ TouchStadia is a Chrome Extension which adds on-screen joystick control to Stadi
 ## Demo
 [![Demo video](https://img.youtube.com/vi/AmnuVkkQBu4/0.jpg)](https://www.youtube.com/watch?v=AmnuVkkQBu4)
 
-## Known issues
-* General latency issues. Optimizations are being worked on!
-
 ## Testing
 TouchStadia also has manifest permissions to run on [html5gamepad.com](https://html5gamepad.com), where you can test the input of the controller with visual feedback! This is useful if you'd rather not wait for a game to open!
 
