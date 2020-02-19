@@ -310,7 +310,7 @@ function main(){
 	}
 
 	const updateTSVisibility = function(){
-		if(window.location.host == "stadia.google.com" && window.location.pathname.substr(1, 6) !== "player"){
+		if(window.location.host == "stadia.google.com" && !window.location.pathname.includes("/player/")){
 			touchStadiaElem.style.display = "none";
 		}else{
 			touchStadiaElem.style.display = "initial";
