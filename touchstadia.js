@@ -320,19 +320,19 @@ function main(){
 	canvasElem.addEventListener("touchstart", function(e){
 		e.preventDefault();
 		handleStickTouch(e, 0);
-		if(drawSticksEn) drawSticks();
+		if(enableDrawSticks) drawSticks();
 	}, false);
 
 	canvasElem.addEventListener("touchmove", function(e){
 		e.preventDefault();
 		handleStickTouch(e, 1);
-		if(drawSticksEn) drawSticks();
+		if(enableDrawSticks) drawSticks();
 	}, false);
 	
 	canvasElem.addEventListener("touchend", function(e){
 		e.preventDefault();
 		handleStickTouch(e, 2);
-		if(drawSticksEn) drawSticks();
+		if(enableDrawSticks) drawSticks();
 	}, false);
 
 	window.onload = function(){
@@ -397,14 +397,12 @@ chrome.storage.sync.get([
 	"buttonBorderTopOffset",
 	"buttonBorderBottomOffset",
 	"opacity",
-	"drawSticksEn",
-	"disableTS"
+	"enableDrawSticks",
+	"disableTouchStadia"
 ], function(settings) {
 	settings.extUrl = chrome.runtime.getURL("/");
 	let injVarTxt = "";
-	const settingsKeys = Object.keys(settings);
-	console.log(settings);
-	for (const key of settingsKeys) {
+	for (const key of Object.keys(settings)) {
 		if(typeof settings[key] === "number" || typeof settings[key] === "boolean"){
 			injVarTxt += "const " + key + " = " + settings[key] + ";";
 		}else if(typeof settings[key] === "string"){
@@ -413,7 +411,7 @@ chrome.storage.sync.get([
 			console.error("Invalid setting type!");
 		}
 	}
-	if(settings.disableTS) return;
+	if(settings.disableTouchStadia) return;
 	const injScript = document.createElement("script");
 	injScript.appendChild(document.createTextNode("(" + (main + "").slice(0, 16) + injVarTxt + (main + "").slice(16) + ")();"));
 	(document.body || document.head || document.documentElement).appendChild(injScript);

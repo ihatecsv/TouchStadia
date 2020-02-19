@@ -6,8 +6,8 @@ chrome.storage.sync.get([
     "buttonBorderTopOffset",
     "buttonBorderBottomOffset",
     "opacity",
-    "drawSticksEn",
-    "disableTS",
+    "enableDrawSticks",
+    "disableTouchStadia",
     "firstRun"
 ], function(settings) {
     const firstRunNotificationElem = document.getElementById("first-run-notification");
@@ -20,8 +20,8 @@ chrome.storage.sync.get([
     const buttonBorderTopOffsetElem = document.getElementById("button-border-top-offset");
     const buttonBorderBottomOffsetElem = document.getElementById("button-border-bottom-offset");
     const opacityElem = document.getElementById("opacity");
-    const drawSticksEnElem = document.getElementById("draw-sticks-en");
-    const disableTSElem = document.getElementById("disable-ts");
+    const enableDrawSticksElem = document.getElementById("enable-draw-sticks");
+    const disableTouchStadiaElem = document.getElementById("disable-touchstadia");
     const applyButtonElem = document.getElementById("apply-button");
 
     if(settings.firstRun){
@@ -37,8 +37,8 @@ chrome.storage.sync.get([
     buttonBorderTopOffsetElem.value = settings.buttonBorderTopOffset;
     buttonBorderBottomOffsetElem.value = settings.buttonBorderBottomOffset;
     opacityElem.value = settings.opacity;
-    drawSticksEnElem.checked = settings.drawSticksEn;
-    disableTSElem.checked = settings.disableTS;
+    enableDrawSticksElem.checked = settings.enableDrawSticks;
+    disableTouchStadiaElem.checked = settings.disableTouchStadia;
 
     firstRunNotificationCloseButtonElem.onclick = function(){
         firstRunNotificationElem.style.display = "none";
@@ -57,8 +57,8 @@ chrome.storage.sync.get([
             "buttonBorderTopOffset": parseInt(buttonBorderTopOffsetElem.value),
             "buttonBorderBottomOffset": parseInt(buttonBorderBottomOffsetElem.value),
             "opacity": parseInt(opacityElem.value),
-            "drawSticksEn": drawSticksEnElem.checked,
-            "disableTS": disableTSElem.checked,
+            "enableDrawSticks": enableDrawSticksElem.checked,
+            "disableTouchStadia": disableTouchStadiaElem.checked,
         };
         chrome.storage.sync.set(startParams, function(){
             console.log("TouchStadia: Set options!");

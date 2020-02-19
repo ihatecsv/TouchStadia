@@ -7,12 +7,28 @@ chrome.runtime.onInstalled.addListener(function() {
         "buttonBorderTopOffset": 80,
         "buttonBorderBottomOffset": 30,
         "opacity": 255,
-        "drawSticksEn" : false,
-        "disableTS": false,
+        "enableDrawSticks" : false,
+        "disableTouchStadia": false,
         "firstRun": true
     };
-    chrome.storage.sync.set(startParams, function() {
-        console.log("Set start params!");
+    chrome.storage.sync.get([
+        "stickRadius",
+        "buttonDiameter",
+        "buttonBorderLeftOffset",
+        "buttonBorderRightOffset",
+        "buttonBorderTopOffset",
+        "buttonBorderBottomOffset",
+        "opacity",
+        "enableDrawSticks",
+        "disableTouchStadia",
+        "firstRun"
+    ], function(settings) {
+        for(const key of Object.keys(settings)){
+            startParams[key] = settings[key];
+        }
+        chrome.storage.sync.set(startParams, function() {
+            console.log("TouchStadia: Set start params!");
+        });
     });
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
         chrome.declarativeContent.onPageChanged.addRules([{
