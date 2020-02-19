@@ -4,60 +4,66 @@
             body {
                 width: 200px;
                 text-align: center;
+                margin: 0;
             }
             input {
-                margin-bottom: 4px;
+                width: 80%;
             }
             .logo-container {
+                margin-bottom: 4px;
+                background-color: #ff7f2a;
+                padding: 10px;
+            }
+            .option {
                 margin-bottom: 4px;
             }
         </style>
     </head>
     <body>
         <div class="logo-container">
-            <img src="img/ts-128.png">
+            <img src="img/ts-text-64.png">
         </div>
         <div id="first-run-notification">
             If you already have Stadia open, you must refresh the window before TouchStadia will function.
             <button type="button" id="first-run-notification-close-button">I understand</button>
         </div>
         <div id="settings">
-            <label for="stick-radius">Stick radius</label>
-            <br/>
-            <input type="number" id="stick-radius">
-            <br/>
-            <label for="button-diameter">Button diameter</label>
-            <br/>
-            <input type="number" id="button-diameter">
-            <br/>
-            <label for="button-border-left-offset">Button border left offset</label>
-            <br/>
-            <input type="number" id="button-border-left-offset">
-            <br/>
-            <label for="button-border-right-offset">Button border right offset</label>
-            <br/>
-            <input type="number" id="button-border-right-offset">
-            <br/>
-            <label for="button-border-top-offset">Button border top offset</label>
-            <br/>
-            <input type="number" id="button-border-top-offset">
-            <br/>
-            <label for="button-border-bottom-offset">Button border bottom offset</label>
-            <br/>
-            <input type="number" id="button-border-bottom-offset">
-            <br/>
-            <label for="opacity">Opacity (0-255)</label>
-            <br/>
-            <input type="number" id="opacity" min="0" max="255">
-            <br/>
-            <label for="enable-draw-sticks">Stick drawing (causes latency)</label>
-            <br/>
-            <input type="checkbox" id="enable-draw-sticks">
-            <br/>
-            <label for="disable-touchstadia">Disable TouchStadia</label>
-            <br/>
-            <input type="checkbox" id="disable-touchstadia">
-            <br/>
+            <div class="option">
+                <label for="stick-radius">Stick radius</label>
+                <input type="number" id="stick-radius">
+            </div>
+            <div class="option">
+                <label for="button-diameter">Button diameter</label>
+                <input type="number" id="button-diameter">
+            </div>
+            <div class="option">
+                <label for="button-border-left-offset">Left offset</label>
+                <input type="number" id="button-border-left-offset">
+            </div>
+            <div class="option">
+                <label for="button-border-right-offset">Right offset</label>
+                <input type="number" id="button-border-right-offset">
+            </div>
+            <div class="option">
+                <label for="button-border-top-offset">Top offset</label>
+                <input type="number" id="button-border-top-offset">
+            </div>
+            <div class="option">
+                <label for="button-border-bottom-offset">Bottom offset</label>
+                <input type="number" id="button-border-bottom-offset">
+            </div>
+            <div class="option">
+                <label for="opacity">Opacity (0-255)</label>
+                <input type="number" id="opacity" min="0" max="255">
+            </div>
+            <div class="option">
+                <label for="enable-draw-sticks">Draw sticks (causes lag)</label>
+                <input type="checkbox" id="enable-draw-sticks">
+            </div>
+            <div class="option">
+                <label for="disable-touchstadia">Disable TouchStadia</label>
+                <input type="checkbox" id="disable-touchstadia">
+            </div>
             <button type="button" id="apply-button">Apply (will refresh page)</button>
         </div>
         <script src="settings.js"></script>
