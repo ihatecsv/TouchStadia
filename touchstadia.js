@@ -1,4 +1,6 @@
 function main(){
+	let blacklist = [];
+	
 	const touchStadiaElem = document.createElement("span");
 	const canvasElem = document.createElement("canvas");
 	const canvasCtx = canvasElem.getContext("2d");
@@ -6,6 +8,8 @@ function main(){
 	const startTime = Date.now();
 
 	const zIndex = 6000;
+
+	const imgExt = ".svg";
 	
 	const stickLColor = "#82b4ff";
 	let stickLActive = false;
@@ -169,11 +173,9 @@ function main(){
 				scale: 1,
 				img: "img/controls/home",
 				dynUpd: true
-			},
+			}
 		]
 	};
-
-	const imgExt = ".svg";
 
 	for(let i = 0; i < emulatedGamepad.buttons.length; i++){
 		const buttonElem = document.createElement("img");
@@ -322,6 +324,13 @@ function main(){
 		}
 	}
 
+	const fetchResources = async function(){
+		const [blacklistResp] = await Promise.all([
+			fetch(extUrl + "res/blacklist.json")
+		]);
+		blacklist = await blacklistResp.json();
+	}
+
 	canvasElem.addEventListener("touchstart", function(e){
 		e.preventDefault();
 		handleStickTouch(e, 0);
@@ -340,7 +349,8 @@ function main(){
 		if(enableDrawSticks) drawSticks();
 	}, false);
 
-	window.onload = function(){
+	window.onload = async function(){
+		await fetchResources();
 		document.body.appendChild(touchStadiaElem);
 		touchStadiaElem.appendChild(canvasElem);
 		for(let i = 0; i < emulatedGamepad.buttons.length; i++){
@@ -372,22 +382,26 @@ function main(){
 	window.addEventListener("popstate", updateTSVisibility);
 	updateTSVisibility();
 
-	let fourGamepadsWarningShown = false;
 	const originalGetGamepads = navigator.getGamepads;
 	navigator.getGamepads = function(){ // The magic happens here
 		const originalGamepads = originalGetGamepads.apply(navigator);
 		const modifiedGamepads = [emulatedGamepad, null, null, null];
-		if(originalGamepads[3] !== null && !fourGamepadsWarningShown){
-			fourGamepadsWarningShown = true;
-			alert("TouchStadia: Four USB gamepads have been detected. The fourth gamepad will not function, as TouchStadia requires a gamepad slot for itself.");
-		}
-		for(let i = 0; i < 3; i++){
+		let insertIndex = 1;
+		originalGamepadsLoop:
+		for(let i = 0; i < 4; i++){
+			if(insertIndex >= 4) break;
 			if(originalGamepads[i] !== null){
-				modifiedGamepads[i+1] = {};
-				for(let property in originalGamepads[i]){
-					modifiedGamepads[i+1][property] = originalGamepads[i][property];
+				for(let j = 0; j < blacklist.length; j++){
+					if(originalGamepads[i].id.includes(blacklist[j])){
+						continue originalGamepadsLoop;
+					}
 				}
-				modifiedGamepads[i+1].index++;
+				modifiedGamepads[insertIndex] = {};
+				for(let property in originalGamepads[i]){
+					modifiedGamepads[insertIndex][property] = originalGamepads[i][property];
+				}
+				modifiedGamepads[insertIndex].index = insertIndex;
+				insertIndex++;
 			} 
 		}
 		return modifiedGamepads;
