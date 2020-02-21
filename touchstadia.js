@@ -370,6 +370,10 @@ function main(){
 			}
 		}
 
+		const isPlayingGame = function(){
+			return window.location.host == "stadia.google.com" && window.location.pathname.includes("/player/");
+		}
+
 		canvasElem.addEventListener("touchstart", function(e){
 			e.preventDefault();
 			handleStickTouch(e, 0);
@@ -392,10 +396,12 @@ function main(){
 			if(e.ctrlKey && e.key === ";"){
 				layoutMode = !layoutMode;
 				if(layoutMode){
+					document.documentElement.requestFullscreen();
 					canvasElem.style.backgroundColor = "#ff00ff55";
 					forceTSVisible = true;
 					updateTSVisibility();
 				}else{
+					if(!isPlayingGame()) document.exitFullscreen();
 					canvasElem.style.backgroundColor = "initial";
 					forceTSVisible = false;
 					updateTSVisibility();
