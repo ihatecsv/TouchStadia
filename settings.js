@@ -11,6 +11,7 @@ chrome.storage.sync.get([
     "enableColors",
     "enableDrawSticks",
     "disableTouchStadia",
+    "buttonConfig",
     "firstRun"
 ], function(settings) {
     const firstRunNotificationElem = document.getElementById("first-run-notification");
@@ -27,11 +28,21 @@ chrome.storage.sync.get([
     const enableDrawSticksElem = document.getElementById("enable-draw-sticks");
     const disableTouchStadiaElem = document.getElementById("disable-touchstadia");
     const applyButtonElem = document.getElementById("apply-button");
+    const resetButtonConfigControlElem = document.getElementById("reset-button-config-control");
+    const resetButtonConfigButtonElem = document.getElementById("reset-button-config-button");
 
     if(settings.firstRun){
         settingsElem.style.display = "none";
     }else{
         firstRunNotificationElem.style.display = "none";
+    }
+
+    if(typeof settings.buttonConfig !== "undefined" && settings.buttonConfig !== null){
+        const disableIfLayoutElems = document.getElementsByClassName("disable-if-layout");
+        for(let i = 0; i < disableIfLayoutElems.length; i++){
+            disableIfLayoutElems[i].disabled = true;
+        }
+        resetButtonConfigControlElem.style.display = "initial";
     }
 
     stickRadiusElem.value = settings.stickRadius;
@@ -69,6 +80,14 @@ chrome.storage.sync.get([
         chrome.storage.sync.set(startParams, function(){
             console.log("TouchStadia: Set options!");
             chrome.tabs.reload();
+        });
+    }
+
+    resetButtonConfigButtonElem.onclick = function(){
+        chrome.storage.sync.set({"buttonConfig": null}, function(){
+            console.log("TouchStadia: Reset button config!");
+            chrome.tabs.reload();
+            window.location.href = window.location.href;
         });
     }
 });

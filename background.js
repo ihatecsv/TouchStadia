@@ -23,6 +23,7 @@ chrome.runtime.onInstalled.addListener(function() {
         "enableColors": false,
         "enableDrawSticks" : false,
         "disableTouchStadia": false,
+        "buttonConfig": null,
         "firstRun": true
     };
     chrome.storage.sync.get([
@@ -36,6 +37,7 @@ chrome.runtime.onInstalled.addListener(function() {
         "enableColors",
         "enableDrawSticks",
         "disableTouchStadia",
+        "buttonConfig",
         "firstRun"
     ], function(settings) {
         for(const key of Object.keys(settings)){
