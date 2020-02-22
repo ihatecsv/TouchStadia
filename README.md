@@ -12,7 +12,7 @@ Simply install the extension and open or refresh Stadia! Click the extension ico
 
 TEMPORARY NOTE: Setting layouts with <kbd>CTRL</kbd>+<kbd>;</kbd> is available in `0.0.24`, which is not yet on the Chrome Web Store.
 
-To move buttons around, press <kbd>CTRL</kbd>+<kbd>;</kbd> in Stadia and layout mode will be activated (indicated by a magenta background.) Tap and drag buttons on your touchscreen to change their positions during this time. Press <kbd>CTRL</kbd>+<kbd>;</kbd> again to disable layout mode. Sometimes this hotkey will not work when Stadia is in-game. This is a [known issue](https://github.com/ihatecsv/TouchStadia/issues/9), so to ensure function please use this shortcut outside of games only for now.
+To move buttons around, press <kbd>CTRL</kbd>+<kbd>;</kbd> in Stadia and layout mode will be activated (indicated by a magenta background.) Tap/click and drag buttons to change their positions during this time. Press <kbd>CTRL</kbd>+<kbd>;</kbd> again to disable layout mode. This hotkey will not work when Stadia is in-game. This is a [known issue](https://github.com/ihatecsv/TouchStadia/issues/9), so to ensure function please only use this shortcut outside of games for now.
 
 Keep in mind that once you change the position of a button in layout mode, that button will no longer move relative to the window border when resizing your browser, so you must maintain the same browser window size for the layout to look consistent. If you create a layout, then shrink your browser, it's possible to lose buttons outside the visible area! To reset the layout, press the `Reset` button in the TouchStadia configuration.
 

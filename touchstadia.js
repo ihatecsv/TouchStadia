@@ -19,6 +19,8 @@ function main(){
 
 		let layoutMode = false;
 		let forceTSVisible = false;
+
+		let buttonInTransit = -1;
 		
 		const stickLColor = "#82b4ff";
 		let stickLActive = false;
@@ -344,15 +346,32 @@ function main(){
 			blacklist = await blacklistResp.json();
 		}
 
-		const layoutButton = function(touchEvent, type, buttonID){
-			const touches = type === 2 ? touchEvent.changedTouches : touchEvent.touches;
+		const layoutButton = function(event, type, buttonID){
+			let clientX = 0;
+			let clientY = 0;
+			if(typeof event.touches !== "undefined" || typeof event.changedTouches !== "undefined"){
+				const touches = type === 2 ? event.changedTouches : event.touches;
+				clientX = touches[0].clientX;
+				clientY = touches[0].clientY;
+			}else{
+				clientX = event.clientX;
+				clientY = event.clientY;
+			}
+
+			if(type === 0){
+				buttonInTransit = buttonID;
+			} else {
+				buttonID = buttonInTransit;
+			}
+			
 			const button = emulatedGamepad.buttons[buttonID];
 			const buttonElem = button.buttonElem;
-			const newX = touches[0].clientX - (buttonElem.offsetWidth/2);
-			const newY = touches[0].clientY - (buttonElem.offsetHeight/2);
+			const newX = clientX - (buttonElem.offsetWidth/2);
+			const newY = clientY - (buttonElem.offsetHeight/2);
 			buttonElem.style.left = newX + "px";
 			buttonElem.style.top = newY + "px";
 			if(type === 2){
+				buttonInTransit = -1;
 				if(typeof button.locRight !== "undefined") delete button.locRight;
 				if(typeof button.locBottom !== "undefined") delete button.locBottom;
 				if(typeof button.dynamicUpdate !== "undefined") delete button.dynamicUpdate;
@@ -365,7 +384,6 @@ function main(){
 					if(typeof sentButtons[i].touched !== "undefined") delete sentButtons[i].touched;
 					if(typeof sentButtons[i].value !== "undefined") delete sentButtons[i].value;
 				}
-				console.log(sentButtons);
 				window.dispatchEvent(new CustomEvent("newButtonConfig", {detail: sentButtons}));
 			}
 		}
@@ -409,6 +427,11 @@ function main(){
 			}
 		});
 
+		document.addEventListener("mousemove", function(e){
+			if(e.which !== 1) return;
+			if(layoutMode) layoutButton(e, 1, undefined);
+		}, false);
+
 		window.onload = async function(){
 			await fetchResources();
 			document.body.appendChild(touchStadiaElem);
@@ -426,6 +449,17 @@ function main(){
 				emulatedGamepad.buttons[i].buttonElem.addEventListener("touchend", function(e){
 					e.preventDefault();
 					layoutMode ? layoutButton(e, 2, i) : pressButton(i, false);
+				}, false);
+
+				emulatedGamepad.buttons[i].buttonElem.addEventListener("mousedown", function(e){
+					if(e.which !== 1) return;
+					e.preventDefault();
+					if(layoutMode) layoutButton(e, 0, i);
+				}, false);
+				emulatedGamepad.buttons[i].buttonElem.addEventListener("mouseup", function(e){
+					if(e.which !== 1) return;
+					e.preventDefault();
+					if(layoutMode) layoutButton(e, 2, i);
 				}, false);
 			}
 			console.log("TouchStadia: Canvas and buttons created!");
@@ -496,7 +530,6 @@ chrome.storage.sync.get([
 
 window.addEventListener("newButtonConfig", function(e) {
 	const buttons = e.detail;
-	console.log(buttons);
 	chrome.storage.sync.set({"buttonConfig": buttons}, function(){
 		console.log("TouchStadia: Set layout!");
 	});
