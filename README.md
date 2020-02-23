@@ -9,7 +9,7 @@ TouchStadia is a Chrome Extension and JavaScript snippet which adds on-screen jo
 
 ## Usage
 ### Android
-* [Tutorial video](https://www.youtube.com/watch?v=vsdJNM9N4Dk)
+Chrome for Android does not support extensions, so we must load TouchStadia into the browser manually! Here's a [tutorial video](https://www.youtube.com/watch?v=vsdJNM9N4Dk) you can use to supplement the instructions below.
 1. Open the [snippet URL](https://drakeluce.com/projects/TouchStadia/) on your phone in Chrome (this works on regular Chrome). I recommend going to the link every time as updates will only be available there.
 2. Select all the text in the box, and copy it.
 3. Open Stadia and make sure to select the "Desktop site" option so it launches properly.
