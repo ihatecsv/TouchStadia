@@ -4,6 +4,8 @@
 
 TouchStadia is a Chrome Extension and JavaScript snippet which adds on-screen joystick control to Stadia for touchscreen devices!
 
+Articles: [The Verge](https://www.theverge.com/2020/2/24/21150914/google-stadia-touchstadia-android-phone-hack), [Android Central](https://www.androidcentral.com/add-touchscreen-controller-stadia-using-touchstadia), [XDA Developers](https://www.xda-developers.com/touchstadia-use-on-screen-controls-google-stadia-chrome-android/), [Stadia Source](https://stadiasource.com/article/375/TouchStadia-Adds-Mobile-Support)
+
 ## Demo
 [![Demo video](https://img.youtube.com/vi/oUlDxbS5smY/0.jpg)](https://www.youtube.com/watch?v=oUlDxbS5smY)
 
