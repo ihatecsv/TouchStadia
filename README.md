@@ -14,7 +14,7 @@ Articles: [The Verge](https://www.theverge.com/2020/2/24/21150914/google-stadia-
 Chrome for Android does not support extensions, so we must load TouchStadia into the browser manually! Here's a [tutorial video](https://www.youtube.com/watch?v=vsdJNM9N4Dk) you can use to supplement the instructions below.
 1. Open the [snippet URL](https://drakeluce.com/projects/TouchStadia/) on your phone in Chrome (this works on regular Chrome). I recommend going to the link every time as updates will only be available there.
 2. Select all the text in the box, and copy it.
-3. Open Stadia and make sure to select the "Desktop site" option so it launches properly.
+3. Open Stadia and make sure to select the "Desktop site" option in the Chrome options menu so it launches properly.
 4. Once Stadia is open, tap the address bar and type <kbd>javascript:</kbd>. Paste the text you copied immediately after the colon, without any spaces between. You must **type** <kbd>javascript:</kbd>, as Chrome will remove it if you try to paste it in.
 5. Hit the ENTER key on your keyboard. Stadia should recognise that a joystick was connected.
 6. Enjoy! You must repeat this procedure if you or your browser closes or refreshes Stadia.
