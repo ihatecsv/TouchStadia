@@ -19,6 +19,9 @@ Chrome for Android does not support extensions, so we must load TouchStadia into
 5. Hit the ENTER key on your keyboard. Stadia should recognise that a joystick was connected.
 6. Enjoy! You must repeat this procedure if you or your browser closes or refreshes Stadia.
 
+#### Snippet safety
+Yes, running snippets of JavaScript on websites can be dangerous if they come from unreliable sources. That being said, the code for TouchStadia Android is being served by my personal website with my real name. As such, my reputation and career as a software developer are on the line. I welcome and encourage all independent security analyses of the TouchStadia code. Please feel free to [contact me](mailto:touchstadia@drakeluce.com) if there are any concerns.
+
 ### Desktop
 Simply [install the extension](https://chrome.google.com/webstore/detail/touchstadia/kdkboloommjpbahkdlhengbghlhcejaj) and open or refresh Stadia! Click the extension icon to show configuration options.
 
