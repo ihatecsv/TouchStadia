@@ -33,7 +33,7 @@ Keep in mind that once you change the position of a button in layout mode, that 
 TouchStadia also has manifest permissions to run on [html5gamepad.com](https://html5gamepad.com), where you can test the input of the controller with visual feedback! This is useful if you'd rather not wait for a game to open!
 
 ## Pull requests
-All pull requests are welcome! Please feel free to improve TouchStadia as you see fit, there's many improvements to be made!
+All pull requests are welcome! Please feel free to improve TouchStadia as you see fit, there's many improvements to be made! If you're thinking of making a change to https://touchstadia.ca, please make a pull request in the [website repo](https://github.com/ihatecsv/TouchStadia-website) instead!
 
 ## Credits
 * Thanks to `/u/revnort` for creating the amazing vector images used for the on-screen buttons and sticks!
