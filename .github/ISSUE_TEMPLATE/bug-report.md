@@ -33,7 +33,8 @@ If applicable, add screenshots to help explain your problem.
  - Device: [e.g. Samsung Galaxy S10+]
  - OS: [e.g. Android 10]
  - Browser [e.g. Chrome, Chromium]
- - Version [e.g. 38]
+ - Browser version [e.g. 38]
+ - TouchStadia version [e.g. 0.0.25], visible when you copied the snippet from https://touchstadia.ca
 
 **Additional context**
 Add any other context about the problem here.
