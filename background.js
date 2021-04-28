@@ -6,7 +6,7 @@ chrome.runtime.onInstalled.addListener(function() {
                     pageUrl: {hostEquals: "stadia.google.com"},
                 }),
                 new chrome.declarativeContent.PageStateMatcher({
-                    pageUrl: {hostEquals: "html5gamepad.com"},
+                    pageUrl: {hostEquals: "gamepad-tester.com"},
                 }),
             ],
             actions: [new chrome.declarativeContent.ShowPageAction()]

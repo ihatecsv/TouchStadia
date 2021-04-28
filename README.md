@@ -30,7 +30,7 @@ To move buttons around, press <kbd>CTRL</kbd>+<kbd>;</kbd> in Stadia and layout 
 Keep in mind that once you change the position of a button in layout mode, that button will no longer move relative to the window border when resizing your browser, so you must maintain the same browser window size for the layout to look consistent. If you create a layout, then shrink your browser, it's possible to lose buttons outside the visible area! To reset the layout, press the `Reset` button in the TouchStadia configuration.
 
 ## Testing
-TouchStadia also has manifest permissions to run on [html5gamepad.com](https://html5gamepad.com), where you can test the input of the controller with visual feedback! This is useful if you'd rather not wait for a game to open!
+TouchStadia also has manifest permissions to run on [gamepad-tester.com](https://gamepad-tester.com), where you can test the input of the controller with visual feedback! This is useful if you'd rather not wait for a game to open!
 
 ## Pull requests
 All pull requests are welcome! Please feel free to improve TouchStadia as you see fit, there's many improvements to be made! If you're thinking of making a change to https://touchstadia.ca, please make a pull request in the [website repo](https://github.com/ihatecsv/TouchStadia-website) instead!

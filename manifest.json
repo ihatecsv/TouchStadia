@@ -19,7 +19,7 @@
 		{
 			"matches": [
 				"https://stadia.google.com/*",
-				"https://html5gamepad.com/*"
+				"https://gamepad-tester.com/*"
 			],
 			"js": ["touchstadia.js"],
 			"run_at": "document_start"
